@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { simpleAction } from './actions/simpleAction';
-
-import logo from './logo.svg';
+import {DisplayCityDataAction } from './actions/DisplayCityData';
 import './App.css';
 
 const mapStateToProps = state => ({
   ...state
  })
-
      const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(simpleAction())
+  DisplayCityDataAction: () => dispatch(DisplayCityDataAction())
  })
 
 class App extends Component {
@@ -19,20 +16,59 @@ class App extends Component {
    }
  render() {
   return (
-   <div className="App">
-    <header className="App-header">
-     <img src={logo} className="App-logo" alt="logo" />
-     <h1 className="App-title">Welcome to React</h1>
-    </header>  
-    <button onClick={this.simpleAction}>Test redux action</button>
-    <pre>
-      {
-        JSON.stringify(this.props)
-      }
-    </pre>
-    <p className="App-intro">
-     To get started, edit <code>src/App.js</code> and save to reload
-    </p>
+   <div>
+     <p><b>WEATHER DATA REPORT</b></p>
+    <div id="DisplayData">
+    <form>
+        <label>
+        Place : <select>
+        <option value = "Horsens">Horsens</option>
+        <option value ="Aarhus">Aarhus</option> 
+        <option value ="Copenhagen">Copenhagen</option>
+        </select>
+        </label>
+      </form><br></br>
+      <textarea id="display_data" ></textarea><br></br>
+      <p><b>Data in interval</b></p>
+      <form>
+        <label>
+        Start Interval(Year-Month-Date) : <input type ="date"></input><br></br>
+        End Interval(Year-Month-Date) : <input type ="date"></input>
+        </label><br></br>
+      </form>
+      <button id="display" onClick={this.DisplayAction}>Display</button><br></br>
+      <textarea id="display_data" >
+        The data from weather will display here 
+      </textarea><br></br>
+    </div>
+    <br></br>
+  
+    <div id="PostData">
+      <p><b>POST/REPORT DATA</b></p>
+    <form>
+        <label>
+        Type : <select>
+        <option value = "percipitation">percipitation</option>
+        <option value ="temperature">temperature</option> 
+        <option value ="cloud coverage">cloud coverage</option>
+        <option value ="wind speed">wind speed</option>
+        </select><br></br>
+        Date Interval(Year-Month-Date) :<input type = "date"></input><br></br>
+        Place : <select>
+        <option value = "Horsens">Horsens</option>
+        <option value ="Aarhus">Aarhus</option> 
+        <option value ="Copenhagen">Copenhagen</option>
+        </select><br></br>
+        Value : <input type = "text"></input><br></br>
+        Unit : <input type = "text"></input><br></br>
+        </label>
+      </form>
+      <button id="Post" onClick={this.PostAction}>Post</button><br></br>
+    </div>
+
+    <br></br>
+  
+    <button id="Reload" onClick={this.ReloadAction}>Reload</button><br></br>
    </div>
   );
  }
